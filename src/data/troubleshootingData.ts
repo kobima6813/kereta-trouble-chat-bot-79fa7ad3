@@ -21,12 +21,6 @@ export const troubleshootingData: TroubleshootingData = {
     solution: "1. בדוק מסנני דלק לזיהום\n2. בדוק צינורות דלק לדליפות\n3. בדוק לחץ משאבת דלק\n4. בדוק פעולת מזרקי הדלק",
     category: "מערכות דלק"
   },
-  "P001": {
-    errorCode: "P001",
-    description: "אובדן כוח מתיחה",
-    solution: "1. בדוק חיבורי מנועי המתיחה\n2. בדוק מהפכי כוח\n3. בדוק מערכות בקרת מתיחה\n4. בדוק תנאי החלקת גלגלים",
-    category: "מערכות כוח"
-  },
   "B001": {
     errorCode: "B001",
     description: "כשל במערכת הבלמים",
