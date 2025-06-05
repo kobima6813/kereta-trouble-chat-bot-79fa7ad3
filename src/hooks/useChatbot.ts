@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Message } from "@/types";
 import { searchTroubleshootingData } from "@/data/troubleshootingData";
 import { toast } from "sonner";
+import { sanitizeInput, validateInput } from "@/utils/sanitization";
 
 export function useChatbot() {
   const [messages, setMessages] = useState<Message[]>([
@@ -24,14 +25,26 @@ export function useChatbot() {
   };
 
   const processUserMessage = async (userMessage: string) => {
-    if (!userMessage.trim()) return;
+    // Validate input
+    const validation = validateInput(userMessage);
+    if (!validation.isValid) {
+      toast.error(validation.error);
+      return;
+    }
+
+    // Sanitize input
+    const sanitizedMessage = sanitizeInput(userMessage);
+    if (!sanitizedMessage.trim()) {
+      toast.error("הודעה לא תקינה");
+      return;
+    }
     
     setIsProcessing(true);
-    addMessage(userMessage, true);
+    addMessage(sanitizedMessage, true);
     
     try {
       // Search the troubleshooting database
-      const results = searchTroubleshootingData(userMessage.toLowerCase());
+      const results = searchTroubleshootingData(sanitizedMessage.toLowerCase());
       
       if (results.length > 0) {
         // Format the response
@@ -70,9 +83,9 @@ export function useChatbot() {
       }
     } catch (error) {
       console.error("Error processing message:", error);
-      toast.error("הייתה שגיאה בעיבוד ההודעה שלך.");
+      toast.error("שגיאה זמנית בשירות. אנא נסה שוב.");
       addMessage(
-        "אני מצטער, אבל נתקלתי בשגיאה בעת עיבוד הבקשה שלך. אנא נסה שוב.",
+        "אני מצטער, אבל נתקלתי בשגיאה זמנית. אנא נסה שוב בעוד רגע.",
         false
       );
     } finally {
