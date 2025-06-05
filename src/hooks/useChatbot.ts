@@ -8,7 +8,7 @@ export function useChatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      content: "Welcome to LocomotiveAI! How can I help you with your locomotive troubleshooting today?",
+      content: "ברוכים הבאים ל-LocomotiveAI! איך אני יכול לעזור לך היום עם אבחון תקלות הקטר?",
       isUser: false,
     },
   ]);
@@ -39,24 +39,24 @@ export function useChatbot() {
         
         if (results.length === 1) {
           const issue = results[0];
-          responseContent = `I found information about "${issue.description}":\n\n`;
+          responseContent = `מצאתי מידע על "${issue.description}":\n\n`;
           if (issue.errorCode) {
-            responseContent += `Error Code: ${issue.errorCode}\n`;
+            responseContent += `קוד שגיאה: ${issue.errorCode}\n`;
           }
-          responseContent += `Category: ${issue.category}\n\n`;
-          responseContent += `Recommended Solution:\n${issue.solution}`;
+          responseContent += `קטגוריה: ${issue.category}\n\n`;
+          responseContent += `פתרון מומלץ:\n${issue.solution}`;
         } else {
-          responseContent = `I found ${results.length} potential issues related to your query:\n\n`;
+          responseContent = `מצאתי ${results.length} תקלות אפשריות הקשורות לשאילתה שלך:\n\n`;
           
           results.forEach((issue, index) => {
             responseContent += `${index + 1}. ${issue.description}`;
             if (issue.errorCode) {
-              responseContent += ` (Error Code: ${issue.errorCode})`;
+              responseContent += ` (קוד שגיאה: ${issue.errorCode})`;
             }
             responseContent += `\n`;
           });
           
-          responseContent += `\nPlease provide more specific information or an error code for more detailed assistance.`;
+          responseContent += `\nאנא ספק מידע ספציפי יותר או קוד שגיאה לקבלת סיוע מפורט יותר.`;
         }
         
         // Add the bot's response
@@ -64,15 +64,15 @@ export function useChatbot() {
       } else {
         // No results found
         addMessage(
-          "I couldn't find specific information about that issue in my database. Please try another search or provide an error code if you have one.",
+          "לא הצלחתי למצוא מידע ספציפי על התקלה הזו במאגר שלי. אנא נסה חיפוש אחר או ספק קוד שגיאה אם יש לך.",
           false
         );
       }
     } catch (error) {
       console.error("Error processing message:", error);
-      toast.error("There was an error processing your message.");
+      toast.error("הייתה שגיאה בעיבוד ההודעה שלך.");
       addMessage(
-        "I'm sorry, but I encountered an error while processing your request. Please try again.",
+        "אני מצטער, אבל נתקלתי בשגיאה בעת עיבוד הבקשה שלך. אנא נסה שוב.",
         false
       );
     } finally {

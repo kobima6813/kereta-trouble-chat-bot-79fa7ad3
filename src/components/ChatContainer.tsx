@@ -20,10 +20,10 @@ const ChatContainer = () => {
   }, [messages]);
 
   return (
-    <Card className="w-full h-full flex flex-col shadow-lg border-2">
+    <Card className="w-full h-full flex flex-col shadow-lg border-2" dir="rtl">
       <CardHeader className="chat-header text-primary-foreground py-3 px-4 flex flex-row items-center gap-2">
         <Train className="h-5 w-5" />
-        <h2 className="text-lg font-semibold">LocomotiveAI Assistant</h2>
+        <h2 className="text-lg font-semibold">עוזר LocomotiveAI</h2>
       </CardHeader>
       
       <ScrollArea 
@@ -44,7 +44,7 @@ const ChatContainer = () => {
                 <div className="h-2 w-2 bg-primary rounded-full animate-pulse"></div>
                 <div className="h-2 w-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                 <div className="h-2 w-2 bg-primary rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                <span className="text-sm text-muted-foreground ml-1">Thinking...</span>
+                <span className="text-sm text-muted-foreground ml-1">חושב...</span>
               </div>
             </div>
           )}

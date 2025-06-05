@@ -23,19 +23,20 @@ const ChatInput = ({ onSendMessage, disabled }: ChatInputProps) => {
   return (
     <form onSubmit={handleSubmit} className="flex gap-2 w-full">
       <Input
-        placeholder="Type your question about locomotive issues..."
+        placeholder="הקלד את השאלה שלך על תקלות בקטר..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         className="flex-1"
         disabled={disabled}
+        dir="rtl"
       />
       <Button 
         type="submit" 
         disabled={!message.trim() || disabled}
         variant="default"
       >
-        <SendHorizonal size={18} className="md:mr-2" />
-        <span className="hidden md:inline">Send</span>
+        <SendHorizonal size={18} className="md:ml-2" />
+        <span className="hidden md:inline">שלח</span>
       </Button>
     </form>
   );
